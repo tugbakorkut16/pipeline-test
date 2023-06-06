@@ -3,5 +3,4 @@ steps:
   args:
   - "app"
   - "deploy"
-  - "--appyaml=application-prod.yaml"
 timeout: '1600s'
