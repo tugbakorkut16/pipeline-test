@@ -87,6 +87,6 @@ echo "<html>
 systemctl start httpd
 systemctl enable httpd  
 
-güncelledim 
+güncelledim deneme4
 
 
