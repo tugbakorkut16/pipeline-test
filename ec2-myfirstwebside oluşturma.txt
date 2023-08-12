@@ -1,0 +1,88 @@
+# AWS EC2 amazon linux kurulumu
+
+Bu rehberde, AWS Yönetim Konsolu üzerinden adım adım bir Ubuntu sunucusu oluşturmayı ve üzerine Apache web sunucusunu kurmayı öğreneceksiniz.
+
+## Adım 1: AWS Yönetim Konsolu'na Giriş
+
+1. Tarayıcınızı açın ve [AWS Yönetim Konsolu](https://aws.amazon.com/console/) sayfasına gidin.
+2. AWS hesabınıza giriş yapın.
+
+## Adım 2: EC2 Örnek Oluşturma
+
+1. AWS Yönetim Konsolu'nda "Hizmetler" menüsünden "EC2" hizmetine gidin.
+2. "Örnek Başlat" düğmesine tıklayın.
+
+## Adım 3: Amazon Machine Image (AMI) Seçimi
+
+1. "1. Adım: Amazon Machine Image (AMI) Seçin" bölümünde, Ubuntu Server 20.04 LTS (veya tercih ettiğiniz bir sürüm) AMI'sını seçin.
+2. "Devam" düğmesine tıklayın.
+
+## Adım 4: Örnek Türü Seçimi
+
+1. "2. Adım: Örnek Türünü Seçin" bölümünde, uygun örnek türünü seçin (örneğin, t2.micro).
+2. "Devam" düğmesine tıklayın.
+
+## Adım 5: Örnek Konfigürasyonu
+
+1. "3. Adım: Örnek Konfigürasyonu" bölümünde, varsayılan değerleri koruyun veya ihtiyaçlarınıza göre özelleştirin.
+2. "Devam" düğmesine tıklayın.
+
+## Adım 6: Depolama Eklemek
+
+1. "4. Adım: Depolama Ekleyin" bölümünde, varsayılan değerleri koruyun veya ihtiyaçlarınıza göre özelleştirin.
+2. "Devam" düğmesine tıklayın.
+
+## Adım 7: Etiketler Ekleme
+
+1. "5. Adım: Etiketler Ekleyin" bölümünde, gerekirse örneğinize bir etiket ekleyin (örneğin, "Name" etiketi ve değeri).
+2. "Devam" düğmesine tıklayın.
+
+## Adım 8: Güvenlik Grupları
+
+1. "6. Adım: Güvenlik Grupları" bölümünde, yeni bir güvenlik grubu oluşturun veya mevcut bir güvenlik grubunu seçin.
+2. SSH erişimi (port 22) sağlayan bir kural eklemeyi unutmayın.
+3. "Devam" düğmesine tıklayın.
+
+## Adım 9: İncele ve Başlat
+
+1. "7. Adım: İncele ve Başlat" bölümünde, yapılandırmayı gözden geçirin ve doğru olduğundan emin olun.
+2. "Başlat" düğmesine tıklayın.
+
+## Adım 10: Anahtar Çifti Oluşturma veya Kullanma
+
+1. Bir önceki adımda oluşturulan bir anahtar çiftini kullanarak erişim sağlamak isterseniz, mevcut anahtar çiftinizi seçin. Aksi takdirde, yeni bir anahtar çifti oluşturun.
+2. "Örnekler Başlat" düğmesine tıklayın.
+
+## Adım 11: Örnek Oluşturuluyor
+
+1. "Örnekleriniz başlatılıyor..." mesajını gördüğünüzde, örnek oluşturulurken bekleyin.
+
+## Adım 12: Erişim ve Bağlantı
+
+1. Örnek başlatıldıktan sonra, örnekleri yönetmek için "Örnekler" bölümüne gidin.
+2. Yeni örneği seçin ve "Açıklama" sekmesini açın.
+3. "IPv4 Genel IP" adresini kopyalayın.
+
+#
+
+#! /bin/bash
+#update os
+yum update -y
+#install apache server
+yum install -y httpd
+# get date and time of server
+DATE_TIME=`date`
+# create a custom index.html file
+echo "<html>
+<head>
+    <title> My First Web Server</title>
+</head>
+<body>
+    <h1>welcome to METAMY</h1>
+    <h1>Hello to Everyone from My First Web Server</h1>
+    <p>This instance is created at <b>$DATE_TIME</b></p>
+</body>
+</html>" > /var/www/html/index.html
+# start apache server
+systemctl start httpd
+systemctl enable httpd   
