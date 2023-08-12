@@ -88,4 +88,5 @@ systemctl start httpd
 systemctl enable httpd  
 
 güncelledim 
+yeni 
 
